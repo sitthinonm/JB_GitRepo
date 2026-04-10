@@ -1,0 +1,518 @@
+{
+  "metadata": {
+    "lastChecked": "2026-04-10T10:30:00+07:00",
+    "nextScheduled": "2026-04-11T08:00:00+07:00",
+    "flowName": "Transition Checklist Scanner",
+    "sharePointSite": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation",
+    "demandFolderPath": "/Shared Documents/04_Digital Capability Center/Demand and Solution Management/Demand - Document/2026",
+    "checklistFile": "Checklist_Dev_AI.xlsx",
+    "totalDemandsScanned": 6,
+    "scanDurationSeconds": 45
+  },
+  "demands": [
+    {
+      "folderId": "DMND0007240",
+      "folderName": "Demand - DMND0007240",
+      "folderUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0007240",
+      "totalItems": 6,
+      "foundItems": 2,
+      "missingItems": 4,
+      "completionPercent": 33.3,
+      "status": "Partial",
+      "checklist": [
+        {
+          "checklistId": 1,
+          "item": "BRD - Requirements (Cost&Benefit Analysis and scope of work)",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRD - xxxx / Business Requirement Document xxxxx",
+          "status": "Found",
+          "matchedFile": "BRD - Bunyut port stability.docx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0007240/BRD%20-%20Bunyut%20port%20stability.docx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 2,
+          "item": "BRD - Specifications",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRS - xxxx / BRDD - xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 3,
+          "item": "RFP/TOR including system design have been prepared and signed by PO",
+          "partyResponsible": "Demand Manager",
+          "mandatory": false,
+          "findingDocsName": "RFP - xxxxx / TOR - xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 4,
+          "item": "The architecture design including integrations/dependency system have been prepared for working team (High Level)",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "System Design Diagram",
+          "status": "Found",
+          "matchedFile": "DAC2-Port Stability Real Time Monitoring.pptx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0007240/DAC2-Port%20Stability%20Real%20Time%20Monitoring.pptx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 5,
+          "item": "Estimated resource and timeline have been prepared by Tech Lead/Solution Architect",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "Resource Plan xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 6,
+          "item": "Budget and cost center have been prepared",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "Project Cost xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        }
+      ]
+    },
+    {
+      "folderId": "DMND0006744",
+      "folderName": "Demand - DMND0006744",
+      "folderUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006744",
+      "totalItems": 6,
+      "foundItems": 6,
+      "missingItems": 0,
+      "completionPercent": 100.0,
+      "status": "Complete",
+      "checklist": [
+        {
+          "checklistId": 1,
+          "item": "BRD - Requirements (Cost&Benefit Analysis and scope of work)",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRD - xxxx / Business Requirement Document xxxxx",
+          "status": "Found",
+          "matchedFile": "BRD - Carbon Management Platform v2.docx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006744/BRD%20-%20Carbon%20Management%20Platform%20v2.docx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 2,
+          "item": "BRD - Specifications",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRS - xxxx / BRDD - xxxx",
+          "status": "Found",
+          "matchedFile": "BRS - Carbon Management Platform Specifications.docx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006744/BRS%20-%20Carbon%20Management%20Platform%20Specifications.docx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 3,
+          "item": "RFP/TOR including system design have been prepared and signed by PO",
+          "partyResponsible": "Demand Manager",
+          "mandatory": false,
+          "findingDocsName": "RFP - xxxxx / TOR - xxxx",
+          "status": "Found",
+          "matchedFile": "TOR - Carbon Platform 2026.docx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006744/TOR%20-%20Carbon%20Platform%202026.docx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 4,
+          "item": "The architecture design including integrations/dependency system have been prepared for working team (High Level)",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "System Design Diagram",
+          "status": "Found",
+          "matchedFile": "System Design Diagram - Carbon Platform.vsdx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006744/System%20Design%20Diagram%20-%20Carbon%20Platform.vsdx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 5,
+          "item": "Estimated resource and timeline have been prepared by Tech Lead/Solution Architect",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "Resource Plan xxxx",
+          "status": "Found",
+          "matchedFile": "Resource Plan - Carbon Platform Q1 2026.xlsx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006744/Resource%20Plan%20-%20Carbon%20Platform%20Q1%202026.xlsx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 6,
+          "item": "Budget and cost center have been prepared",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "Project Cost xxxx",
+          "status": "Found",
+          "matchedFile": "Project Cost - Carbon Platform 2026.xlsx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006744/Project%20Cost%20-%20Carbon%20Platform%202026.xlsx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        }
+      ]
+    },
+    {
+      "folderId": "DMND0005303",
+      "folderName": "Demand - DMND0005303",
+      "folderUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0005303",
+      "totalItems": 6,
+      "foundItems": 0,
+      "missingItems": 6,
+      "completionPercent": 0.0,
+      "status": "Missing",
+      "checklist": [
+        {
+          "checklistId": 1,
+          "item": "BRD - Requirements (Cost&Benefit Analysis and scope of work)",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRD - xxxx / Business Requirement Document xxxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 2,
+          "item": "BRD - Specifications",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRS - xxxx / BRDD - xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 3,
+          "item": "RFP/TOR including system design have been prepared and signed by PO",
+          "partyResponsible": "Demand Manager",
+          "mandatory": false,
+          "findingDocsName": "RFP - xxxxx / TOR - xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 4,
+          "item": "The architecture design including integrations/dependency system have been prepared for working team (High Level)",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "System Design Diagram",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 5,
+          "item": "Estimated resource and timeline have been prepared by Tech Lead/Solution Architect",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "Resource Plan xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 6,
+          "item": "Budget and cost center have been prepared",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "Project Cost xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        }
+      ]
+    },
+    {
+      "folderId": "DMND0006413",
+      "folderName": "Demand - DMND0006413",
+      "folderUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006413",
+      "totalItems": 6,
+      "foundItems": 4,
+      "missingItems": 2,
+      "completionPercent": 66.7,
+      "status": "Partial",
+      "checklist": [
+        {
+          "checklistId": 1,
+          "item": "BRD - Requirements (Cost&Benefit Analysis and scope of work)",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRD - xxxx / Business Requirement Document xxxxx",
+          "status": "Found",
+          "matchedFile": "Business Requirement Document - ESG Reporting v1.2.docx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006413/Business%20Requirement%20Document%20-%20ESG%20Reporting%20v1.2.docx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 2,
+          "item": "BRD - Specifications",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRS - xxxx / BRDD - xxxx",
+          "status": "Found",
+          "matchedFile": "BRDD - ESG Reporting Detail Design.docx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006413/BRDD%20-%20ESG%20Reporting%20Detail%20Design.docx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 3,
+          "item": "RFP/TOR including system design have been prepared and signed by PO",
+          "partyResponsible": "Demand Manager",
+          "mandatory": false,
+          "findingDocsName": "RFP - xxxxx / TOR - xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 4,
+          "item": "The architecture design including integrations/dependency system have been prepared for working team (High Level)",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "System Design Diagram",
+          "status": "Found",
+          "matchedFile": "System Design Diagram - ESG Platform Integration.pptx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006413/System%20Design%20Diagram%20-%20ESG%20Platform%20Integration.pptx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 5,
+          "item": "Estimated resource and timeline have been prepared by Tech Lead/Solution Architect",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "Resource Plan xxxx",
+          "status": "Found",
+          "matchedFile": "Resource Plan - ESG Dashboard 2026.xlsx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006413/Resource%20Plan%20-%20ESG%20Dashboard%202026.xlsx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 6,
+          "item": "Budget and cost center have been prepared",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "Project Cost xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        }
+      ]
+    },
+    {
+      "folderId": "DMND0006719",
+      "folderName": "Demand - DMND0006719 CIF x ESG dashboard (7 data)",
+      "folderUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006719%20CIF%20x%20ESG%20dashboard%20(7%20data)",
+      "totalItems": 6,
+      "foundItems": 1,
+      "missingItems": 5,
+      "completionPercent": 16.7,
+      "status": "Partial",
+      "checklist": [
+        {
+          "checklistId": 1,
+          "item": "BRD - Requirements (Cost&Benefit Analysis and scope of work)",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRD - xxxx / Business Requirement Document xxxxx",
+          "status": "Found",
+          "matchedFile": "BRD - CIF ESG Dashboard Integration.docx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Demand%20-%20DMND0006719%20CIF%20x%20ESG%20dashboard%20(7%20data)/BRD%20-%20CIF%20ESG%20Dashboard%20Integration.docx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 2,
+          "item": "BRD - Specifications",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRS - xxxx / BRDD - xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 3,
+          "item": "RFP/TOR including system design have been prepared and signed by PO",
+          "partyResponsible": "Demand Manager",
+          "mandatory": false,
+          "findingDocsName": "RFP - xxxxx / TOR - xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 4,
+          "item": "The architecture design including integrations/dependency system have been prepared for working team (High Level)",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "System Design Diagram",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 5,
+          "item": "Estimated resource and timeline have been prepared by Tech Lead/Solution Architect",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "Resource Plan xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 6,
+          "item": "Budget and cost center have been prepared",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "Project Cost xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        }
+      ]
+    },
+    {
+      "folderId": "DMND0007257_DMND0007498",
+      "folderName": "Amalgamation - DMND0007257, DMND0007498",
+      "folderUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Amalgamation%20-%20DMND0007257%2C%20DMND0007498",
+      "totalItems": 6,
+      "foundItems": 3,
+      "missingItems": 3,
+      "completionPercent": 50.0,
+      "status": "Partial",
+      "checklist": [
+        {
+          "checklistId": 1,
+          "item": "BRD - Requirements (Cost&Benefit Analysis and scope of work)",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRD - xxxx / Business Requirement Document xxxxx",
+          "status": "Found",
+          "matchedFile": "BRD - Amalgamation Energy Analytics Platform.docx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Amalgamation%20-%20DMND0007257%2C%20DMND0007498/BRD%20-%20Amalgamation%20Energy%20Analytics%20Platform.docx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 2,
+          "item": "BRD - Specifications",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "BRS - xxxx / BRDD - xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 3,
+          "item": "RFP/TOR including system design have been prepared and signed by PO",
+          "partyResponsible": "Demand Manager",
+          "mandatory": false,
+          "findingDocsName": "RFP - xxxxx / TOR - xxxx",
+          "status": "Found",
+          "matchedFile": "TOR - Energy Analytics Amalgamation 2026.docx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Amalgamation%20-%20DMND0007257%2C%20DMND0007498/TOR%20-%20Energy%20Analytics%20Amalgamation%202026.docx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 4,
+          "item": "The architecture design including integrations/dependency system have been prepared for working team (High Level)",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "System Design Diagram",
+          "status": "Found",
+          "matchedFile": "System Design Diagram - Energy Analytics v2.vsdx",
+          "matchedFileUrl": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation/Shared%20Documents/04_Digital%20Capability%20Center/Demand%20and%20Solution%20Management/Demand%20-%20Document/2026/Amalgamation%20-%20DMND0007257%2C%20DMND0007498/System%20Design%20Diagram%20-%20Energy%20Analytics%20v2.vsdx",
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 5,
+          "item": "Estimated resource and timeline have been prepared by Tech Lead/Solution Architect",
+          "partyResponsible": "Tech Lead / Solution Architect",
+          "mandatory": true,
+          "findingDocsName": "Resource Plan xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        },
+        {
+          "checklistId": 6,
+          "item": "Budget and cost center have been prepared",
+          "partyResponsible": "Demand Manager",
+          "mandatory": true,
+          "findingDocsName": "Project Cost xxxx",
+          "status": "Missing",
+          "matchedFile": null,
+          "matchedFileUrl": null,
+          "updatedBy": "Power Automate",
+          "lastUpdate": "2026-04-10T10:30:00+07:00"
+        }
+      ]
+    }
+  ]
+}
