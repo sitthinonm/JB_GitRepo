@@ -1,0 +1,609 @@
+{
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "flowDisplayName": "Transition Checklist Scanner",
+    "description": "Scans SharePoint Demand folders daily and updates dashboard_data.json in OneDrive",
+    "author": "Digital Capability Center",
+    "version": "1.0.0",
+    "note": "Import this into Power Automate. You will need to re-authenticate connectors after import."
+  },
+  "parameters": {
+    "$connections": {
+      "defaultValue": {},
+      "type": "Object"
+    }
+  },
+  "triggers": {
+    "Recurrence_Daily_8AM": {
+      "recurrence": {
+        "frequency": "Day",
+        "interval": 1,
+        "schedule": {
+          "hours": ["8"],
+          "minutes": ["0"]
+        },
+        "timeZone": "SE Asia Standard Time"
+      },
+      "type": "Recurrence",
+      "description": "Run every day at 8:00 AM Bangkok time"
+    }
+  },
+  "actions": {
+    "Init_varSiteUrl": {
+      "runAfter": {},
+      "type": "InitializeVariable",
+      "description": "SharePoint site URL",
+      "inputs": {
+        "variables": [
+          {
+            "name": "varSiteUrl",
+            "type": "string",
+            "value": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation"
+          }
+        ]
+      }
+    },
+    "Init_varDemandPath": {
+      "runAfter": {
+        "Init_varSiteUrl": ["Succeeded"]
+      },
+      "type": "InitializeVariable",
+      "description": "Path to the 2026 demand folder",
+      "inputs": {
+        "variables": [
+          {
+            "name": "varDemandPath",
+            "type": "string",
+            "value": "/Shared Documents/04_Digital Capability Center/Demand and Solution Management/Demand - Document/2026"
+          }
+        ]
+      }
+    },
+    "Init_varResults": {
+      "runAfter": {
+        "Init_varDemandPath": ["Succeeded"]
+      },
+      "type": "InitializeVariable",
+      "description": "Array to hold all demand scan results",
+      "inputs": {
+        "variables": [
+          {
+            "name": "varResults",
+            "type": "array",
+            "value": []
+          }
+        ]
+      }
+    },
+    "Init_varChecklistResults": {
+      "runAfter": {
+        "Init_varResults": ["Succeeded"]
+      },
+      "type": "InitializeVariable",
+      "description": "Array to hold checklist results for current demand",
+      "inputs": {
+        "variables": [
+          {
+            "name": "varChecklistResults",
+            "type": "array",
+            "value": []
+          }
+        ]
+      }
+    },
+    "Init_varFoundFile": {
+      "runAfter": {
+        "Init_varChecklistResults": ["Succeeded"]
+      },
+      "type": "InitializeVariable",
+      "description": "Stores matched filename",
+      "inputs": {
+        "variables": [
+          {
+            "name": "varFoundFile",
+            "type": "string",
+            "value": ""
+          }
+        ]
+      }
+    },
+    "Init_varFoundFileUrl": {
+      "runAfter": {
+        "Init_varFoundFile": ["Succeeded"]
+      },
+      "type": "InitializeVariable",
+      "description": "Stores matched file URL",
+      "inputs": {
+        "variables": [
+          {
+            "name": "varFoundFileUrl",
+            "type": "string",
+            "value": ""
+          }
+        ]
+      }
+    },
+    "Init_varStartTime": {
+      "runAfter": {
+        "Init_varFoundFileUrl": ["Succeeded"]
+      },
+      "type": "InitializeVariable",
+      "description": "Record start time for duration calculation",
+      "inputs": {
+        "variables": [
+          {
+            "name": "varStartTime",
+            "type": "string",
+            "value": "@{utcNow()}"
+          }
+        ]
+      }
+    },
+    "SharePoint_List_DemandFolders": {
+      "runAfter": {
+        "Init_varStartTime": ["Succeeded"]
+      },
+      "type": "ApiConnection",
+      "description": "List all folders in the 2026 demand directory",
+      "inputs": {
+        "host": {
+          "connection": {
+            "name": "@parameters('$connections')['sharepointonline']['connectionId']"
+          }
+        },
+        "method": "get",
+        "path": "/datasets/@{encodeURIComponent(encodeURIComponent(variables('varSiteUrl')))}/folders/@{encodeURIComponent(encodeURIComponent(variables('varDemandPath')))}",
+        "queries": {}
+      }
+    },
+    "Filter_DemandFolders": {
+      "runAfter": {
+        "SharePoint_List_DemandFolders": ["Succeeded"]
+      },
+      "type": "Query",
+      "description": "Filter only folders starting with 'Demand' or 'Amalgamation'",
+      "inputs": {
+        "from": "@body('SharePoint_List_DemandFolders')?['value']",
+        "where": "@or(startsWith(item()?['Name'], 'Demand'), startsWith(item()?['Name'], 'Amalgamation'))"
+      }
+    },
+    "Excel_List_ChecklistRows": {
+      "runAfter": {
+        "Filter_DemandFolders": ["Succeeded"]
+      },
+      "type": "ApiConnection",
+      "description": "Read all rows from Checklist_Dev_AI.xlsx — do this once outside the loop for efficiency",
+      "inputs": {
+        "host": {
+          "connection": {
+            "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+          }
+        },
+        "method": "get",
+        "path": "/drives/@{encodeURIComponent('b!REPLACE_WITH_DRIVE_ID')}/items/@{encodeURIComponent('REPLACE_WITH_FILE_ID')}/workbook/tables/@{encodeURIComponent('ChecklistTable')}/rows",
+        "queries": {
+          "$top": 100
+        }
+      },
+      "_note": "Replace REPLACE_WITH_DRIVE_ID and REPLACE_WITH_FILE_ID with actual values from SharePoint. Use 'List rows present in a table' action via the UI instead of this raw API call."
+    },
+    "Apply_to_each_DemandFolder": {
+      "runAfter": {
+        "Excel_List_ChecklistRows": ["Succeeded"]
+      },
+      "type": "Foreach",
+      "description": "Process each demand folder",
+      "foreach": "@body('Filter_DemandFolders')",
+      "actions": {
+        "Set_varChecklistResults_Empty": {
+          "runAfter": {},
+          "type": "SetVariable",
+          "description": "Reset checklist results for each demand",
+          "inputs": {
+            "name": "varChecklistResults",
+            "value": []
+          }
+        },
+        "Compose_FolderInfo": {
+          "runAfter": {
+            "Set_varChecklistResults_Empty": ["Succeeded"]
+          },
+          "type": "Compose",
+          "description": "Capture current folder metadata",
+          "inputs": {
+            "folderName": "@{items('Apply_to_each_DemandFolder')?['Name']}",
+            "folderUrl": "@{items('Apply_to_each_DemandFolder')?['{Link}']}",
+            "folderId": "@{items('Apply_to_each_DemandFolder')?['Name']}"
+          }
+        },
+        "SharePoint_List_FilesInDemand": {
+          "runAfter": {
+            "Compose_FolderInfo": ["Succeeded"]
+          },
+          "type": "ApiConnection",
+          "description": "List files inside the current demand folder",
+          "inputs": {
+            "host": {
+              "connection": {
+                "name": "@parameters('$connections')['sharepointonline']['connectionId']"
+              }
+            },
+            "method": "get",
+            "path": "/datasets/@{encodeURIComponent(encodeURIComponent(variables('varSiteUrl')))}/folders/@{encodeURIComponent(encodeURIComponent(concat(variables('varDemandPath'), '/', items('Apply_to_each_DemandFolder')?['Name'])))}",
+            "queries": {}
+          }
+        },
+        "Apply_to_each_ChecklistRow": {
+          "runAfter": {
+            "SharePoint_List_FilesInDemand": ["Succeeded"]
+          },
+          "type": "Foreach",
+          "description": "Process each row from the checklist",
+          "foreach": "@body('Excel_List_ChecklistRows')?['value']",
+          "actions": {
+            "Condition_IsFileCheck": {
+              "runAfter": {},
+              "type": "If",
+              "description": "Check if this row requires a file (Finding Docs Name is not N/A)",
+              "expression": {
+                "and": [
+                  {
+                    "not": {
+                      "equals": [
+                        "@toLower(trim(items('Apply_to_each_ChecklistRow')?['Finding Docs Name']))",
+                        "n/a"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "actions": {
+                "Set_varFoundFile_Empty": {
+                  "runAfter": {},
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "varFoundFile",
+                    "value": ""
+                  }
+                },
+                "Set_varFoundFileUrl_Empty": {
+                  "runAfter": {
+                    "Set_varFoundFile_Empty": ["Succeeded"]
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "varFoundFileUrl",
+                    "value": ""
+                  }
+                },
+                "Compose_Keywords": {
+                  "runAfter": {
+                    "Set_varFoundFileUrl_Empty": ["Succeeded"]
+                  },
+                  "type": "Compose",
+                  "description": "Split Finding Docs Name by '/' to get search keywords",
+                  "inputs": "@split(items('Apply_to_each_ChecklistRow')?['Finding Docs Name'], '/')"
+                },
+                "Apply_to_each_Keyword": {
+                  "runAfter": {
+                    "Compose_Keywords": ["Succeeded"]
+                  },
+                  "type": "Foreach",
+                  "description": "Check each keyword against files in the demand folder",
+                  "foreach": "@outputs('Compose_Keywords')",
+                  "actions": {
+                    "Filter_MatchingFiles": {
+                      "runAfter": {},
+                      "type": "Query",
+                      "description": "Find files where name contains the keyword (case-insensitive)",
+                      "inputs": {
+                        "from": "@body('SharePoint_List_FilesInDemand')?['value']",
+                        "where": "@contains(toLower(item()?['Name']), toLower(trim(items('Apply_to_each_Keyword'))))"
+                      }
+                    },
+                    "Condition_FileFound": {
+                      "runAfter": {
+                        "Filter_MatchingFiles": ["Succeeded"]
+                      },
+                      "type": "If",
+                      "description": "If matching file found, capture its name and URL",
+                      "expression": {
+                        "and": [
+                          {
+                            "greater": [
+                              "@length(body('Filter_MatchingFiles'))",
+                              0
+                            ]
+                          }
+                        ]
+                      },
+                      "actions": {
+                        "Set_varFoundFile": {
+                          "runAfter": {},
+                          "type": "SetVariable",
+                          "inputs": {
+                            "name": "varFoundFile",
+                            "value": "@{first(body('Filter_MatchingFiles'))?['Name']}"
+                          }
+                        },
+                        "Set_varFoundFileUrl": {
+                          "runAfter": {
+                            "Set_varFoundFile": ["Succeeded"]
+                          },
+                          "type": "SetVariable",
+                          "inputs": {
+                            "name": "varFoundFileUrl",
+                            "value": "@{first(body('Filter_MatchingFiles'))?['{Link}']}"
+                          }
+                        }
+                      },
+                      "else": {
+                        "actions": {}
+                      }
+                    }
+                  }
+                },
+                "Condition_AppendResult": {
+                  "runAfter": {
+                    "Apply_to_each_Keyword": ["Succeeded"]
+                  },
+                  "type": "If",
+                  "description": "Determine if file was found and build result object",
+                  "expression": {
+                    "and": [
+                      {
+                        "not": {
+                          "equals": [
+                            "@variables('varFoundFile')",
+                            ""
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "actions": {
+                    "Compose_FoundResult": {
+                      "runAfter": {},
+                      "type": "Compose",
+                      "inputs": {
+                        "checklistId": "@items('Apply_to_each_ChecklistRow')?['Checklist ID']",
+                        "item": "@items('Apply_to_each_ChecklistRow')?['ITEM']",
+                        "partyResponsible": "@items('Apply_to_each_ChecklistRow')?['PARTY RESPONSIBLE']",
+                        "mandatory": "@equals(items('Apply_to_each_ChecklistRow')?['MANDATORY'], 'Y')",
+                        "findingDocsName": "@items('Apply_to_each_ChecklistRow')?['Finding Docs Name']",
+                        "status": "Found",
+                        "matchedFile": "@variables('varFoundFile')",
+                        "matchedFileUrl": "@variables('varFoundFileUrl')",
+                        "updatedBy": "Power Automate",
+                        "lastUpdate": "@addHours(utcNow(), 7)"
+                      }
+                    },
+                    "Append_FoundResult": {
+                      "runAfter": {
+                        "Compose_FoundResult": ["Succeeded"]
+                      },
+                      "type": "AppendToArrayVariable",
+                      "inputs": {
+                        "name": "varChecklistResults",
+                        "value": "@outputs('Compose_FoundResult')"
+                      }
+                    }
+                  },
+                  "else": {
+                    "actions": {
+                      "Compose_MissingResult": {
+                        "runAfter": {},
+                        "type": "Compose",
+                        "inputs": {
+                          "checklistId": "@items('Apply_to_each_ChecklistRow')?['Checklist ID']",
+                          "item": "@items('Apply_to_each_ChecklistRow')?['ITEM']",
+                          "partyResponsible": "@items('Apply_to_each_ChecklistRow')?['PARTY RESPONSIBLE']",
+                          "mandatory": "@equals(items('Apply_to_each_ChecklistRow')?['MANDATORY'], 'Y')",
+                          "findingDocsName": "@items('Apply_to_each_ChecklistRow')?['Finding Docs Name']",
+                          "status": "Missing",
+                          "matchedFile": null,
+                          "matchedFileUrl": null,
+                          "updatedBy": "Power Automate",
+                          "lastUpdate": "@addHours(utcNow(), 7)"
+                        }
+                      },
+                      "Append_MissingResult": {
+                        "runAfter": {
+                          "Compose_MissingResult": ["Succeeded"]
+                        },
+                        "type": "AppendToArrayVariable",
+                        "inputs": {
+                          "name": "varChecklistResults",
+                          "value": "@outputs('Compose_MissingResult')"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "else": {
+                "actions": {
+                  "Compose_NAResult": {
+                    "runAfter": {},
+                    "type": "Compose",
+                    "description": "For N/A items - no file search needed",
+                    "inputs": {
+                      "checklistId": "@items('Apply_to_each_ChecklistRow')?['Checklist ID']",
+                      "item": "@items('Apply_to_each_ChecklistRow')?['ITEM']",
+                      "partyResponsible": "@items('Apply_to_each_ChecklistRow')?['PARTY RESPONSIBLE']",
+                      "mandatory": "@equals(items('Apply_to_each_ChecklistRow')?['MANDATORY'], 'Y')",
+                      "findingDocsName": "N/A",
+                      "status": "N/A",
+                      "matchedFile": null,
+                      "matchedFileUrl": null,
+                      "updatedBy": "Power Automate",
+                      "lastUpdate": "@addHours(utcNow(), 7)"
+                    }
+                  },
+                  "Append_NAResult": {
+                    "runAfter": {
+                      "Compose_NAResult": ["Succeeded"]
+                    },
+                    "type": "AppendToArrayVariable",
+                    "inputs": {
+                      "name": "varChecklistResults",
+                      "value": "@outputs('Compose_NAResult')"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Compose_FoundCount": {
+          "runAfter": {
+            "Apply_to_each_ChecklistRow": ["Succeeded"]
+          },
+          "type": "Compose",
+          "description": "Count items with status Found",
+          "inputs": "@length(filter(variables('varChecklistResults'), item => equals(item['status'], 'Found')))"
+        },
+        "Compose_DemandResult": {
+          "runAfter": {
+            "Compose_FoundCount": ["Succeeded"]
+          },
+          "type": "Compose",
+          "description": "Build complete demand result object",
+          "inputs": {
+            "folderId": "@outputs('Compose_FolderInfo')?['folderId']",
+            "folderName": "@outputs('Compose_FolderInfo')?['folderName']",
+            "folderUrl": "@outputs('Compose_FolderInfo')?['folderUrl']",
+            "totalItems": "@length(variables('varChecklistResults'))",
+            "foundItems": "@outputs('Compose_FoundCount')",
+            "missingItems": "@sub(length(variables('varChecklistResults')), outputs('Compose_FoundCount'))",
+            "completionPercent": "@if(equals(length(variables('varChecklistResults')), 0), 0, mul(div(outputs('Compose_FoundCount'), length(variables('varChecklistResults'))), 100))",
+            "status": "@if(equals(outputs('Compose_FoundCount'), length(variables('varChecklistResults'))), 'Complete', if(equals(outputs('Compose_FoundCount'), 0), 'Missing', 'Partial'))",
+            "checklist": "@variables('varChecklistResults')",
+            "lastChecked": "@addHours(utcNow(), 7)"
+          }
+        },
+        "Append_DemandToResults": {
+          "runAfter": {
+            "Compose_DemandResult": ["Succeeded"]
+          },
+          "type": "AppendToArrayVariable",
+          "description": "Add demand result to main results array",
+          "inputs": {
+            "name": "varResults",
+            "value": "@outputs('Compose_DemandResult')"
+          }
+        }
+      }
+    },
+    "Compose_FinalJSON": {
+      "runAfter": {
+        "Apply_to_each_DemandFolder": ["Succeeded"]
+      },
+      "type": "Compose",
+      "description": "Build the complete dashboard_data.json structure",
+      "inputs": {
+        "metadata": {
+          "lastChecked": "@addHours(utcNow(), 7)",
+          "nextScheduled": "@addHours(addDays(utcNow(), 1), 7)",
+          "flowName": "Transition Checklist Scanner",
+          "sharePointSite": "https://banpugroup.sharepoint.com/sites/Internal_Digital_Innovation",
+          "demandFolderPath": "/Shared Documents/04_Digital Capability Center/Demand and Solution Management/Demand - Document/2026",
+          "checklistFile": "Checklist_Dev_AI.xlsx",
+          "totalDemandsScanned": "@length(variables('varResults'))",
+          "scanDurationSeconds": "@div(sub(ticks(utcNow()), ticks(variables('varStartTime'))), 10000000)"
+        },
+        "demands": "@variables('varResults')"
+      }
+    },
+    "OneDrive_Check_FileExists": {
+      "runAfter": {
+        "Compose_FinalJSON": ["Succeeded"]
+      },
+      "type": "ApiConnection",
+      "description": "Check if dashboard_data.json already exists",
+      "inputs": {
+        "host": {
+          "connection": {
+            "name": "@parameters('$connections')['onedriveforbusiness']['connectionId']"
+          }
+        },
+        "method": "get",
+        "path": "/datasets/default/files/@{encodeURIComponent(encodeURIComponent('/Claude/Transition Checklist/dashboard_data.json'))}"
+      }
+    },
+    "Condition_FileExists": {
+      "runAfter": {
+        "OneDrive_Check_FileExists": ["Succeeded", "Failed"]
+      },
+      "type": "If",
+      "description": "If file exists update it, otherwise create it",
+      "expression": {
+        "and": [
+          {
+            "equals": [
+              "@outputs('OneDrive_Check_FileExists')['statusCode']",
+              200
+            ]
+          }
+        ]
+      },
+      "actions": {
+        "OneDrive_Update_File": {
+          "runAfter": {},
+          "type": "ApiConnection",
+          "description": "Update existing dashboard_data.json",
+          "inputs": {
+            "host": {
+              "connection": {
+                "name": "@parameters('$connections')['onedriveforbusiness']['connectionId']"
+              }
+            },
+            "method": "put",
+            "path": "/datasets/default/files/@{encodeURIComponent(encodeURIComponent('/Claude/Transition Checklist/dashboard_data.json'))}",
+            "body": "@{string(outputs('Compose_FinalJSON'))}"
+          }
+        }
+      },
+      "else": {
+        "actions": {
+          "OneDrive_Create_File": {
+            "runAfter": {},
+            "type": "ApiConnection",
+            "description": "Create new dashboard_data.json",
+            "inputs": {
+              "host": {
+                "connection": {
+                  "name": "@parameters('$connections')['onedriveforbusiness']['connectionId']"
+                }
+              },
+              "method": "post",
+              "path": "/datasets/default/files",
+              "queries": {
+                "folderPath": "/Claude/Transition Checklist",
+                "name": "dashboard_data.json",
+                "queryParametersSingleEncoded": true
+              },
+              "body": "@{string(outputs('Compose_FinalJSON'))}"
+            }
+          }
+        }
+      }
+    },
+    "Terminate_Success": {
+      "runAfter": {
+        "Condition_FileExists": ["Succeeded"]
+      },
+      "type": "Terminate",
+      "description": "Flow completed successfully",
+      "inputs": {
+        "runStatus": "Succeeded",
+        "runError": {
+          "code": "0",
+          "message": "@concat('Scan completed. ', string(length(variables('varResults'))), ' demands processed.')"
+        }
+      }
+    }
+  },
+  "outputs": {}
+}
