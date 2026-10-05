@@ -1,0 +1,11 @@
+{
+  "name": "Transition Checklist Dashboard",
+  "install": "python3 -c 'import json, pathlib; json.load(pathlib.Path(\"dashboard/dashboard_data.json\").open()); assert pathlib.Path(\"dashboard/index.html\").is_file()'",
+  "start": "bash .cursor/start-dashboard.sh",
+  "ports": [
+    {
+      "name": "dashboard",
+      "port": 8080
+    }
+  ]
+}
